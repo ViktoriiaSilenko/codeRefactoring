@@ -28,7 +28,7 @@ public class Calculator {
 			toConsole = "false";
 		}
 
-		calculate(operation, firstOp, secondOp, scale, toConsole);
+		calculate(new Operation(operation, firstOp, secondOp), scale, toConsole);
 	}
 
 	/**
@@ -44,8 +44,7 @@ public class Calculator {
 	 * For example, + 2 2 true
 	 */
 
-	public static int calculate(String operation, String firstOp, String secondOp, 
-			String scale, String toConsole) {
+	public static int calculate(Operation operation, String scale, String toConsole) {
 		report = "";
 		report += "Nachali rabotu\n";	
 
@@ -54,19 +53,19 @@ public class Calculator {
 			isConsole = true;
 		}
 
-		switch (operation) {
+		switch (operation.getName()) {
 		case "+": {
 			report += "Operaciya slojit\n";
 			int firstNumber = 0;
 			try {
-				firstNumber = Integer.parseInt(firstOp);
+				firstNumber = Integer.parseInt(operation.getFirstOp());
 			} catch (Exception ex) {
 				System.out.println("Oshibka");
 				return -1;
 			}
 			int secondNumber = 0;
 			try {
-				secondNumber = Integer.parseInt(secondOp);
+				secondNumber = Integer.parseInt(operation.getSecondOp());
 			} catch (Exception ex) {
 				System.out.println("Oshibka");
 				return -1;
@@ -100,14 +99,14 @@ public class Calculator {
 			report += "Operaciya vychitanie\n";
 			int firstNumber = 0;
 			try {
-				firstNumber = Integer.parseInt(firstOp);
+				firstNumber = Integer.parseInt(operation.getFirstOp());
 			} catch (Exception ex) {
 				System.out.println("Oshibka");
 				return -1;
 			}
 			int secondNumber = 0;
 			try {
-				secondNumber = Integer.parseInt(secondOp);
+				secondNumber = Integer.parseInt(operation.getSecondOp());
 			} catch (Exception ex) {
 				System.out.println(getErrorMessage());
 				return -1;
@@ -140,14 +139,14 @@ public class Calculator {
 			report += "Operaciya umnojeniya\n";
 			int firstNumber = 0;
 			try {
-				firstNumber = Integer.parseInt(firstOp);
+				firstNumber = Integer.parseInt(operation.getFirstOp());
 			} catch (Exception ex) {
 				System.out.println(getErrorMessage());
 				return -1;
 			}
 			int secondNumber = 0;
 			try {
-				secondNumber = Integer.parseInt(secondOp);
+				secondNumber = Integer.parseInt(operation.getSecondOp());
 			} catch (Exception ex) {
 				System.out.println(getErrorMessage());
 				return -1;
