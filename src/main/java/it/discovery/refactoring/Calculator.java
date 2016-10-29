@@ -28,7 +28,7 @@ public class Calculator {
 			toConsole = "false";
 		}
 
-		calculate(operation, firstOp, secondOp, scale, toConsole, "");
+		calculate(operation, firstOp, secondOp, scale, toConsole);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Calculator {
 	 */
 
 	public static int calculate(String operation, String firstOp, String secondOp, 
-			String scale, String toConsole, String text) {
+			String scale, String toConsole) {
 		report = "";
 		report += "Nachali rabotu\n";	
 
