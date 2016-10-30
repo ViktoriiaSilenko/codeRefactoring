@@ -46,22 +46,26 @@ public class Calculator {
 
 		boolean isConsole = isConsole(toConsole);
 
-		switch (operation.getName()) {
-		case "+": {
-			operationResult = calculateSum(operation, scale, isConsole);
-			break;
-		}
+		try {
+			switch (operation.getName()) {
+			case "+": {
+				operationResult = calculateSum(operation, scale, isConsole);
+				break;
+			}
 
-		case "-": {
-			operationResult = calculateSubtraction(operation, scale, isConsole);
-			break;
-		}
+			case "-": {
+				operationResult = calculateSubtraction(operation, scale, isConsole);
+				break;
+			}
 
-		case "*": {
-			operationResult = calculateMult(operation, scale, isConsole);
-			break;
-		}
+			case "*": {
+				operationResult = calculateMult(operation, scale, isConsole);
+				break;
+			}
 
+			}
+		} catch (Exception e) {
+			return -1;
 		}
 		return operationResult;
 	}
@@ -78,22 +82,10 @@ public class Calculator {
 		report += "Operaciya slojit\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
-		int firstNumber = 0;
-		try {
-			firstNumber = Integer.parseInt(firstOp);
-		} catch (Exception ex) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
-		}
-		int secondNumber = 0;
-		try {
-			secondNumber = Integer.parseInt(secondOp);
-		} catch (Exception ex) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
-		}
+		int firstNumber = toInt(firstOp);
+		int secondNumber = toInt(secondOp);
 		
-		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
+		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber + secondNumber;
 		report += "Rezultat " + convertToScale(result, scale) + "\n";
@@ -116,27 +108,25 @@ public class Calculator {
 		return 0;
 		
 	}
+
+	private static int toInt(String text) {
+		try {
+			return Integer.parseInt(text);
+		} catch (NumberFormatException ex) {
+			System.out.println(ERROR_MESSAGE);
+			//return -1;
+			throw new RuntimeException(ex);
+		}
+	}
 	
 	private static int calculateSubtraction(Operation operation, String scale, boolean isConsole) {
 		report += "Operaciya vychitanie\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
-		int firstNumber = 0;
-		try {
-			firstNumber = Integer.parseInt(firstOp);
-		} catch (Exception ex) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
-		}
-		int secondNumber = 0;
-		try {
-			secondNumber = Integer.parseInt(secondOp);
-		} catch (Exception ex) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
-		}
+		int firstNumber = toInt(firstOp);
+		int secondNumber = toInt(secondOp);
 		
-		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
+		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber - secondNumber;
 		report += "Rezultat " + convertToScale(result, scale) + "\n";
@@ -163,21 +153,9 @@ public class Calculator {
 		report += "Operaciya umnojeniya\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
-		int firstNumber = 0;
-		try {
-			firstNumber = Integer.parseInt(firstOp);
-		} catch (Exception ex) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
-		}
-		int secondNumber = 0;
-		try {
-			secondNumber = Integer.parseInt(secondOp);
-		} catch (Exception ex) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
-		}
-		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
+		int firstNumber = toInt(firstOp);
+		int secondNumber = toInt(secondOp);
+		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 		int result = firstNumber * secondNumber;
 		report += "Rezultat " + convert(result, scale) + "\n";
 		System.out.println(result);
@@ -227,7 +205,7 @@ public class Calculator {
 
 class ReportTools {
 	
-	public static String printArguments(int firstNumber, int secondNumber, String scale) {
+	public static String getArguments(int firstNumber, int secondNumber, String scale) {
 		String report = "Argument 1 " + Calculator.convertToScale(firstNumber, scale) + "\n";
 		report += "Argument 2 " + Calculator.convertToScale(secondNumber, scale) + "\n";
 		return report;
