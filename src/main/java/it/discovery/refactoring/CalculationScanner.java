@@ -11,10 +11,6 @@ public class CalculationScanner {
 	
 	public static final String HEADER_LINES = "Data::Stroki";	
     
-    public static final String POINT = ".";
-    
-    public static final String ONE = "1";
-    
     public static final String DEFAULT_SCAN_FOLDER =  "c:\\test.txt";
 	
 	private static String report;

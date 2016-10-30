@@ -8,7 +8,7 @@ import java.io.IOException;
  * Calculate unit that implements arithmetic operations
  */
 public class Calculator {
-	private static final String ERROR_MESSAGE = "Oshibka";
+	private static final String ERROR_MESSAGE = "Error";
 	private static String report = "";
 
 	public static void main(String[] args) {
@@ -119,7 +119,7 @@ public class Calculator {
 	}
 
 	private static void saveToFile(String content) throws IOException {
-		FileWriter writer = new FileWriter("c:\\test.txt");
+		FileWriter writer = new FileWriter(CalculationScanner.DEFAULT_SCAN_FOLDER);
 		BufferedWriter out = new BufferedWriter(writer);
 		out.write(content);
 		out.close();
