@@ -44,10 +44,7 @@ public class Calculator {
 		report += "Nachali rabotu\n";
 		int operationResult = 0;
 
-		boolean isConsole = false;
-		if (toConsole != null && toConsole.equals("true")) {
-			isConsole = true;
-		}
+		boolean isConsole = isConsole(toConsole);
 
 		switch (operation.getName()) {
 		case "+": {
@@ -67,6 +64,14 @@ public class Calculator {
 
 		}
 		return operationResult;
+	}
+
+	private static boolean isConsole(String toConsole) {
+		boolean isConsole = false;
+		if (toConsole != null && toConsole.equals("true")) {
+			isConsole = true;
+		}
+		return isConsole;
 	}
 	
 	private static int calculateSum(Operation operation, String scale, boolean isConsole) {
