@@ -34,7 +34,7 @@ public class CalculatorScannerTest {
 			assertNotNull(obj);
 			assertTrue(obj instanceof ScanResult);
 			ScanResult result = (ScanResult) obj;
-			assertEquals(result.getLineCount().getLineCount(), 5);
+			assertEquals(result.getLineCount(), 5);
 			assertEquals(result.getReport(), 
 							"[Operaciya slojit, " +
 							"Argument 1 2, " + 
