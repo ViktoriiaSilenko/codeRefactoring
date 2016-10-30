@@ -8,8 +8,6 @@ public class Operation {
 	private String scale;
 	private String toConsole;
 	
-	
-
 	public Operation(String name, String firstOp, String secondOp, String scale, String toConsole) {
 		super();
 		this.name = name;
@@ -28,33 +26,16 @@ public class Operation {
 		return firstOp;
 	}
 
-	/*public void setFirstOp(String firstOp) {
-		this.firstOp = firstOp;
-	}*/
-
 	public String getSecondOp() {
 		return secondOp;
 	}
-
-	/*public void setSecondOp(String secondOp) {
-		this.secondOp = secondOp;
-	}*/
 
 	public String getScale() {
 		return scale;
 	}
 
-	/*public void setScale(String scale) {
-		this.scale = scale;
-	}*/
-
 	public String getToConsole() {
 		return toConsole;
 	}
-
-	/*public void setToConsole(String toConsole) {
-		this.toConsole = toConsole;
-	}*/
-	
 	
 }
