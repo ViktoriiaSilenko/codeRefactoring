@@ -86,9 +86,9 @@ public class Calculator {
 			System.out.println("Oshibka");
 			return -1;
 		}
+		
+		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
 
-		report += "Argument 1 " + convertToScale(firstNumber, scale) + "\n";
-		report += "Argument 2 " + convertToScale(secondNumber, scale) + "\n";
 		int sum = firstNumber + secondNumber;
 		report += "Rezultat " + convertToScale(sum, scale) + "\n";
 		System.out.println(sum);
@@ -129,9 +129,9 @@ public class Calculator {
 			System.out.println("Oshibka");
 			return -1;
 		}
+		
+		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
 
-		report += "Argument 1 " + convertToScale(firstNumber, scale) + "\n";
-		report += "Argument 2 " + convertToScale(secondNumber, scale) + "\n";
 		firstNumber -= secondNumber;
 		report += "Rezultat " + convertToScale(firstNumber, scale) + "\n";
 		System.out.println(firstNumber);
@@ -171,8 +171,7 @@ public class Calculator {
 			System.out.println("Oshibka");
 			return -1;
 		}
-		report += "Argument 1 " + convert(firstNumber, scale) + "\n";
-		report += "Argument 2 " + convert(secondNumber, scale) + "\n";
+		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
 		int result = firstNumber * secondNumber;
 		report += "Rezultat " + convert(result, scale) + "\n";
 		System.out.println(result);
@@ -194,7 +193,7 @@ public class Calculator {
 		return 0;
 	}
 
-	private static String convertToScale(int value, String scale) {
+	public static String convertToScale(int value, String scale) {
 		switch (scale) {
 		case "2":
 			String result = Integer.toBinaryString(value);
@@ -221,6 +220,17 @@ public class Calculator {
 		
 		String result = Integer.toString(value, defaultScale);
 		return result;		
+	}
+	
+}
+
+class ReportTools {
+	
+	public static String printArguments(int firstNumber, int secondNumber, String scale) {
+		String report = "Argument 1 " + Calculator.convertToScale(firstNumber, scale) + "\n";
+		report += "Argument 2 " + Calculator.convertToScale(secondNumber, scale) + "\n";
+		return report;
+		
 	}
 	
 }
