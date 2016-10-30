@@ -43,10 +43,10 @@ public class CalculationScanner {
 				//Pustoy blok. Pochemu? Ya ne znayu
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Oshibka!");
+			System.out.println("Error!");
 		}
 		catch (IOException e) {
-			System.out.println("Oshibka!");
+			System.out.println("Error!");
 			throw new Exception("!");
 		}
 		return scanResult;
