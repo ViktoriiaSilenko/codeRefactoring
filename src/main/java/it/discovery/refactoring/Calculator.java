@@ -2,6 +2,7 @@ package it.discovery.refactoring;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Calculate unit that implements arithmetic operations
@@ -95,10 +96,7 @@ public class Calculator {
 			if (isConsole) {
 				System.out.println(report);
 			} else {
-				FileWriter writer = new FileWriter("c:\\test.txt");
-				BufferedWriter out = new BufferedWriter(writer);
-				out.write(report);
-				out.close();
+				saveToFile(report);
 			}
 
 		} catch (Exception e) {
@@ -107,6 +105,13 @@ public class Calculator {
 		}
 		return 0;
 		
+	}
+
+	private static void saveToFile(String content) throws IOException {
+		FileWriter writer = new FileWriter("c:\\test.txt");
+		BufferedWriter out = new BufferedWriter(writer);
+		out.write(content);
+		out.close();
 	}
 
 	private static int toInt(String text) {
@@ -136,10 +141,7 @@ public class Calculator {
 			if (isConsole) {
 				System.out.println(report);
 			} else {
-				FileWriter writer = new FileWriter("c:\\test.txt");
-				BufferedWriter out = new BufferedWriter(writer);
-				out.write(report);
-				out.close();
+				saveToFile(report);
 			}
 
 		} catch (Exception e) {
@@ -164,10 +166,7 @@ public class Calculator {
 			if (isConsole) {
 				System.out.println(report);
 			} else {
-				FileWriter w = new FileWriter("c:\\test.txt");
-				BufferedWriter out = new BufferedWriter(w);
-				out.write(report);
-				out.close();
+				saveToFile(report);
 			}
 
 		} catch (Exception e) {
