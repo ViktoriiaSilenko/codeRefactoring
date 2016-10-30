@@ -196,17 +196,13 @@ public class Calculator {
 	public static String convertToScale(int value, String scale) {
 		switch (scale) {
 		case "2":
-			String result = Integer.toBinaryString(value);
-			return result;
+			return Integer.toBinaryString(value);
 		case "8":
-			String result2 = Integer.toOctalString(value);
-			return result2;
+			return Integer.toOctalString(value);
 		case "16":
-			String result3 = Integer.toHexString(value);
-			return result3;
+			return Integer.toHexString(value);
 		default:
-			String result4 = "" + value;
-			return result4;
+			return "" + value;
 		}
 	}
 
@@ -218,8 +214,7 @@ public class Calculator {
 			
 		}
 		
-		String result = Integer.toString(value, defaultScale);
-		return result;		
+		return Integer.toString(value, defaultScale);	
 	}
 	
 }
