@@ -42,8 +42,6 @@ public class Calculator {
 
 	public static void calculate(Operation operation) {
 
-		String toConsole = operation.getToConsole();
-		String scale = operation.getScale();
 		String report = "";
 		try {
 			report += calculateReport(operation);
@@ -55,11 +53,8 @@ public class Calculator {
 	}
 
 	public static String calculateReport(Operation calcOperation) throws IOException {
-		String toConsole = calcOperation.getToConsole();
-		String scale = calcOperation.getScale();
 		
-		String report = "";
-		report += "Nachali rabotu\n";
+		String report = "Nachali rabotu\n";
 
 		switch (calcOperation.getName()) {
 		case "+": {
