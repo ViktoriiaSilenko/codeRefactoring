@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Vector;
 
 public class CalculationScanner {
-	public static String report;
+	private static String report;
 	
-	public static ScanResult scanResult;
+	private static ScanResult scanResult;
 	
 	public static void init() {
 		scanResult = new ScanResult();

@@ -37,7 +37,7 @@ public class CalculatorTest {
 		Calculator.calculateReport(new Operation("+", "1", "2", "10", "true"));
 	
 		//assertEquals("", Calculator.report); // red - green - refactor
-		assertEquals(Calculator.report, "Nachali rabotu\n" +
+		assertEquals(Calculator.getReport(), "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 1\n" + 
 		"Argument 2 2\n" +
@@ -55,7 +55,7 @@ public class CalculatorTest {
 	public void calculate_DecreaseWithDecimalScaleAndConsuleOutput_Success() {
 		Calculator.calculate(new Operation("-", "5", "2", "10", "true"));
 		//assertEquals("", Calculator.report); // red - green - refactor
-		assertEquals(Calculator.report, "Nachali rabotu\n" +
+		assertEquals(Calculator.getReport(), "Nachali rabotu\n" +
 		"Operaciya vychitanie\n" +
 		"Argument 1 5\n" + 
 		"Argument 2 2\n" +
@@ -70,7 +70,7 @@ public class CalculatorTest {
 	public void calculate_MultiplyWithDecimalScaleAndConsuleOutput_Success() {
 		Calculator.calculate(new Operation("*", "2", "3", "10", "true"));
 		//assertEquals("", Calculator.report); // red - green - refactor
-		assertEquals(Calculator.report, "Nachali rabotu\n" +
+		assertEquals(Calculator.getReport(), "Nachali rabotu\n" +
 		"Operaciya umnojeniya\n" +
 		"Argument 1 2\n" + 
 		"Argument 2 3\n" +
@@ -84,7 +84,7 @@ public class CalculatorTest {
 	//Given_When_Then
 	public void calculate_SumWithBinaryScaleAndConsuleOutput_Success() {
 		Calculator.calculate(new Operation("+", "1", "5", "2", "true"));
-		assertEquals(Calculator.report, "Nachali rabotu\n" +
+		assertEquals(Calculator.getReport(), "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 1\n" + 
 		"Argument 2 101\n" +
@@ -98,7 +98,7 @@ public class CalculatorTest {
 	//Given_When_Then
 	public void calculate_SumWithOctalScaleAndConsuleOutput_Success() {
 		Calculator.calculate(new Operation("+", "2", "8", "8", "true"));
-		assertEquals(Calculator.report, "Nachali rabotu\n" +
+		assertEquals(Calculator.getReport(), "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 2\n" + 
 		"Argument 2 10\n" +
@@ -112,7 +112,7 @@ public class CalculatorTest {
 	//Given_When_Then
 	public void calculate_SumWithHexScaleAndConsuleOutput_Success() {
 		Calculator.calculate(new Operation("+", "5", "12", "16", "true"));
-		assertEquals(Calculator.report, "Nachali rabotu\n" +
+		assertEquals(Calculator.getReport(), "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 5\n" + 
 		"Argument 2 c\n" +

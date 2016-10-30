@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class Calculator {
 	private static final String ERROR_MESSAGE = "Oshibka";
-	public static String report = "";
+	private static String report = "";
 
 	public static void main(String[] args) {
 
@@ -76,6 +76,10 @@ public class Calculator {
 		//Calculator.report += report;
 		Calculator.report = report;
 		
+		return report;
+	}
+	
+	public static String getReport() {
 		return report;
 	}
 
