@@ -59,9 +59,9 @@ public class CalculationScanner {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ScannerWrapper wrapper = new ScannerWrapper();
-		wrapper.scanner = new CalculationScanner();
-		Object result = wrapper.scan();
+		//ScannerWrapper wrapper = new ScannerWrapper();
+		//wrapper.scanner = new CalculationScanner();
+		Object result = CalculationScanner.scan();
 		try {
 			ScanResult data = (ScanResult) result;
 			data.printLineCount();
@@ -113,11 +113,14 @@ class ScanResult {
 }
 
 class ScannerWrapper {
-	public CalculationScanner scanner;
+	//public CalculationScanner scanner;
+	public ScannerWrapper() {
+		CalculationScanner.init();
+	}
 	
 	public Object scan() throws Exception {
-		scanner.init();
-		return scanner.scan();
+		//CalculationScanner.init();
+		return CalculationScanner.scan();
 	}
 }
 
