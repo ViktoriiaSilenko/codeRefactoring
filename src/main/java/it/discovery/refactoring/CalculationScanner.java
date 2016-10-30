@@ -9,8 +9,6 @@ import java.util.Vector;
 
 public class CalculationScanner {
 	
-	public static final String HEADER_LINES = "Data::Stroki";	
-    
     public static final String DEFAULT_SCAN_FOLDER =  "c:\\test.txt";
 	
 	private static String report;
@@ -89,10 +87,6 @@ class LineContainer extends BaseLineContainer{
 	
 }
 
-class FutureLineContainer extends LineContainer{
-	
-}
-
 class ScanResult {
 	public BaseLineContainer lineCount;
 	
@@ -105,15 +99,15 @@ class ScanResult {
 	}
 	
 	public void printLineCount() {
-		printInfo("Data::Chislo linij " + lineCount.lineCount);		
+		printInfo(Constants.SECOND_HEADER_LINES + lineCount.lineCount);		
 	}
 	
 	public void printLines() {
-		printInfo(CalculationScanner.HEADER_LINES + lines);
+		printInfo(Constants.HEADER_LINES + lines);
 	}
 
 	public void printReport() {
-		printInfo("Data::Tekst " + report);
+		printInfo(Constants.FOOTER_LINES + report);
 	}
 	
 }
@@ -125,4 +119,10 @@ class ScannerWrapper {
 		scanner.init();
 		return scanner.scan();
 	}
+}
+
+interface Constants {
+	public static final String HEADER_LINES = "Data::Stroki";
+	public static final String FOOTER_LINES = "Data::Tekst ";
+	public static final String SECOND_HEADER_LINES = "Data::Chislo linij ";
 }
