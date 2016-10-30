@@ -90,9 +90,9 @@ public class Calculator {
 		
 		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
 
-		int sum = firstNumber + secondNumber;
-		report += "Rezultat " + convertToScale(sum, scale) + "\n";
-		System.out.println(sum);
+		int result = firstNumber + secondNumber;
+		report += "Rezultat " + convertToScale(result, scale) + "\n";
+		System.out.println(result);
 		try {
 			report += "Zakonchili rabotu\n";
 			if (isConsole) {
@@ -133,9 +133,9 @@ public class Calculator {
 		
 		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
 
-		firstNumber -= secondNumber;
-		report += "Rezultat " + convertToScale(firstNumber, scale) + "\n";
-		System.out.println(firstNumber);
+		int result = firstNumber - secondNumber;
+		report += "Rezultat " + convertToScale(result, scale) + "\n";
+		System.out.println(result);
 		try {
 			report += "Zakonchili rabotu\n";
 			if (isConsole) {

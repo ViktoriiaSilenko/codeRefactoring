@@ -29,6 +29,21 @@ public class CalculatorTest {
 	
 	@Test
 	//Given_When_Then
+	public void calculate_DecreaseWithDecimalScaleAndConsuleOutput_Success() {
+		int result = Calculator.calculate(new Operation("-", "5", "2"), "10", "true");
+		//assertEquals("", Calculator.report); // red - green - refactor
+		assertEquals(Calculator.report, "Nachali rabotu\n" +
+		"Operaciya vychitanie\n" +
+		"Argument 1 5\n" + 
+		"Argument 2 2\n" +
+		"Rezultat 3\n" +
+		"Zakonchili rabotu\n");
+
+		assertEquals(0, result);
+	}
+	
+	@Test
+	//Given_When_Then
 	public void calculate_MultiplyWithDecimalScaleAndConsuleOutput_Success() {
 		int result = Calculator.calculate(new Operation("*", "2", "3"), "10", "true");
 		//assertEquals("", Calculator.report); // red - green - refactor
