@@ -7,6 +7,7 @@ import java.io.FileWriter;
  * Calculate unit that implements arithmetic operations
  */
 public class Calculator {
+	private static final String ERROR_MESSAGE = "Oshibka";
 	public static String report = null;
 
 
@@ -76,14 +77,14 @@ public class Calculator {
 		try {
 			firstNumber = Integer.parseInt(firstOp);
 		} catch (Exception ex) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		int secondNumber = 0;
 		try {
 			secondNumber = Integer.parseInt(secondOp);
 		} catch (Exception ex) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		
@@ -104,7 +105,7 @@ public class Calculator {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		return 0;
@@ -119,14 +120,14 @@ public class Calculator {
 		try {
 			firstNumber = Integer.parseInt(firstOp);
 		} catch (Exception ex) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		int secondNumber = 0;
 		try {
 			secondNumber = Integer.parseInt(secondOp);
 		} catch (Exception ex) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		
@@ -147,7 +148,7 @@ public class Calculator {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		return 0;
@@ -161,14 +162,14 @@ public class Calculator {
 		try {
 			firstNumber = Integer.parseInt(firstOp);
 		} catch (Exception ex) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		int secondNumber = 0;
 		try {
 			secondNumber = Integer.parseInt(secondOp);
 		} catch (Exception ex) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		report += ReportTools.printArguments(firstNumber, secondNumber, scale);
@@ -187,7 +188,7 @@ public class Calculator {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Oshibka");
+			System.out.println(ERROR_MESSAGE);
 			return -1;
 		}
 		return 0;
