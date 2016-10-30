@@ -15,7 +15,7 @@ public class CalculatorScannerTest {
 	
 	@BeforeClass // before all tests
 	public static void before() {
-		CalculationScanner.init();
+		//CalculationScanner.init();
 	}
 	
 	@Test
@@ -34,14 +34,14 @@ public class CalculatorScannerTest {
 			assertNotNull(obj);
 			assertTrue(obj instanceof ScanResult);
 			ScanResult result = (ScanResult) obj;
-			assertEquals(result.lineCount.lineCount, 5);
-			assertEquals(result.report, 
+			assertEquals(result.getLineCount().getLineCount(), 5);
+			assertEquals(result.getReport(), 
 							"[Operaciya slojit, " +
 							"Argument 1 2, " + 
 							"Argument 2 3, " +
 							"Rezultat 5, " +
 							"Zakonchili rabotu]");
-			assertEquals(result.lines.size(), 5);
+			assertEquals(result.getLines().size(), 5);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}

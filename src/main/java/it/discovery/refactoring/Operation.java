@@ -10,7 +10,7 @@ public class Operation {
 	
 	public Operation(String name, String firstOp, String secondOp, String scale, String toConsole) {
 		super();
-		this.name = name;
+		this.setName(name);
 		this.firstOp = firstOp;
 		this.secondOp = secondOp;
 		this.scale = scale;
@@ -20,7 +20,10 @@ public class Operation {
 	public String getName() {
 		return name;
 	}
-
+	
+	private void setName(String name) {
+		this.name = name;
+	}
 
 	public String getFirstOp() {
 		return firstOp;

@@ -12,14 +12,9 @@ public class CalculationScanner {
     public static final String DEFAULT_SCAN_FOLDER =  "c:\\test.txt";
 	
 	private static String report;
-	
-	private static ScanResult scanResult;
-	
-	public static void init() {
-		scanResult = new ScanResult();
-	}
 
 	public static Object scan() throws Exception {
+		ScanResult scanResult = null;
 		String defaultPath = CalculationScanner.DEFAULT_SCAN_FOLDER;
 		
 		try {
@@ -29,7 +24,7 @@ public class CalculationScanner {
 				List<String> lines = Files.readAllLines(Paths.get(defaultPath));
 				//StringBuilder sb = new StringBuilder();
 				//String line = reader.readLine();
-				int linesCount=0;
+				//int linesCount=0;
 				//Vector lines = new Vector<>();
 
 				/*while (line != null) {
@@ -39,10 +34,12 @@ public class CalculationScanner {
 					linesCount = linesCount + 1;
 				}*/
 				report = lines.toString();
-				scanResult.lineCount = new LineContainer();
-				scanResult.lineCount.lineCount = lines.size();
-				scanResult.lines = new Vector(lines);
-				scanResult.report = report;
+				
+				scanResult = new ScanResult(new LineContainer(lines.size()), new Vector(lines), report);
+				/*scanResult.setLineCount(new LineContainer());
+				scanResult.getLineCount().setLineCount(lines.size());
+				scanResult.setLines(new Vector(lines));
+				scanResult.setReport(report);*/
 			 
 		} catch (FileNotFoundException e) {
 			System.out.println("Error!");
@@ -74,52 +71,84 @@ public class CalculationScanner {
 }
 
 class BaseLineContainer {
-	public int lineCount;
+	private int lineCount;
 	
+	public BaseLineContainer(int lineCount) {
+		this.lineCount = lineCount;
+	}
+
 	public BaseLineContainer() {
 		if(!(this instanceof LineContainer)) {
 			System.out.println("Error!");
 		}
 	}
+
+	public int getLineCount() {
+		return lineCount;
+	}
+
+	public void setLineCount(int lineCount) {
+		this.lineCount = lineCount;
+	}
 }
 
 class LineContainer extends BaseLineContainer{
+	public LineContainer(int lineCount) {
+		super(lineCount);
+	}
 	
 }
 
 class ScanResult {
-	public BaseLineContainer lineCount;
+	private BaseLineContainer lineCount;
 	
-	public Vector lines;
+	private Vector lines;
 	
-	public String report;
+	private String report;
 	
+	public ScanResult(BaseLineContainer lineCount, Vector lines, String report) {
+		super();
+		this.lineCount = lineCount;
+		this.lines = lines;
+		this.report = report;
+	}
+
 	private void printInfo(String content) {
 		System.out.println(content);
 	}
 	
 	public void printLineCount() {
-		printInfo(Constants.SECOND_HEADER_LINES + lineCount.lineCount);		
+		printInfo(Constants.SECOND_HEADER_LINES + getLineCount().getLineCount());		
 	}
 	
 	public void printLines() {
-		printInfo(Constants.HEADER_LINES + lines);
+		printInfo(Constants.HEADER_LINES + getLines());
 	}
 
 	public void printReport() {
-		printInfo(Constants.FOOTER_LINES + report);
+		printInfo(Constants.FOOTER_LINES + getReport());
+	}
+
+	public BaseLineContainer getLineCount() {
+		return lineCount;
+	}
+
+	public Vector getLines() {
+		return lines;
+	}
+
+
+	public String getReport() {
+		return report;
 	}
 	
 }
 
 class ScannerWrapper {
-	//public CalculationScanner scanner;
-	public ScannerWrapper() {
-		CalculationScanner.init();
-	}
 	
 	public Object scan() throws Exception {
 		//CalculationScanner.init();
+		ScanResult scanResult = null;
 		return CalculationScanner.scan();
 	}
 }

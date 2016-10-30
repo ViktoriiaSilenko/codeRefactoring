@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class Calculator {
 	private static final String ERROR_MESSAGE = "Error";
-	private static String report = "";
+	private static String report = null;
 
 	public static void main(String[] args) {
 
@@ -49,7 +49,7 @@ public class Calculator {
 			System.out.println(ERROR_MESSAGE);
 			throw new RuntimeException(e);
 		}
-		Calculator.report = report;
+		Calculator.setReport(report);
 	}
 
 	public static String calculateReport(Operation calcOperation) throws IOException {
@@ -74,7 +74,7 @@ public class Calculator {
 
 		}
 		//Calculator.report += report;
-		Calculator.report = report;
+		Calculator.setReport(report);
 		
 		return report;
 	}
@@ -82,7 +82,7 @@ public class Calculator {
 	public static String getReport() {
 		return report;
 	}
-
+	
 	private static boolean isConsole(String toConsole) {
 		boolean isConsole = false;
 		if (toConsole != null && toConsole.equals("true")) {
@@ -113,7 +113,7 @@ public class Calculator {
 		}
 
 		//Calculator.report += report;
-		Calculator.report = report;
+		Calculator.setReport(report);
 		return report;
 
 	}
@@ -158,7 +158,7 @@ public class Calculator {
 		}
 
 		//Calculator.report += report;
-		Calculator.report = report;
+		Calculator.setReport(report);
 		return report;
 	}
 
@@ -184,7 +184,7 @@ public class Calculator {
 		}
 
 		//Calculator.report += report;
-		Calculator.report = report;
+		Calculator.setReport(report);
 		return report;
 	}
 
@@ -210,6 +210,10 @@ public class Calculator {
 		}
 
 		return Integer.toString(value, defaultScale);
+	}
+
+	private static void setReport(String report) {
+		Calculator.report = report;
 	}
 
 }
