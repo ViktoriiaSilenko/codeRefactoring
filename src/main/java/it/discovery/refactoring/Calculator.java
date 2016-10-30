@@ -9,22 +9,18 @@ import java.io.IOException;
  */
 public class Calculator {
 	private static final String ERROR_MESSAGE = "Oshibka";
-	public static String report = null;
+	public static String report = "";
 
 	public static void main(String[] args) {
 
-		String scale = null;
-		try {
+		String scale = "10";
+		if(args.length > 3) {
 			scale = args[3];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			scale = "10";
-		}
+		} 
 
-		String toConsole = null;
-		try {
+		String toConsole = "false";
+		if(args.length > 4) {
 			toConsole = args[4];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			toConsole = "false";
 		}
 
 		calculate(new Operation(args[0], args[1], args[2], scale, toConsole));
@@ -44,19 +40,18 @@ public class Calculator {
 	 *            For example, + 2 2 true
 	 */
 
-	public static int calculate(Operation operation) {
+	public static void calculate(Operation operation) {
 
 		String toConsole = operation.getToConsole();
 		String scale = operation.getScale();
 		String report = "";
 		try {
-			report = calculateReport(operation);
+			report += calculateReport(operation);
 		} catch (Exception e) {
 			System.out.println(ERROR_MESSAGE);
-			return -1;
+			throw new RuntimeException(e);
 		}
 		Calculator.report = report;
-		return 0;
 	}
 
 	public static String calculateReport(Operation calcOperation) throws IOException {
@@ -83,6 +78,9 @@ public class Calculator {
 		}
 
 		}
+		//Calculator.report += report;
+		Calculator.report = report;
+		
 		return report;
 	}
 
@@ -106,7 +104,7 @@ public class Calculator {
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber + secondNumber;
-		report += "Rezultat " + convertToScale(result, scale) + "\n";
+		report += "Rezultat " + convert(result, scale) + "\n";
 		System.out.println(result);
 		report += "Zakonchili rabotu\n";
 		if (isConsole) {
@@ -115,6 +113,7 @@ public class Calculator {
 			saveToFile(report);
 		}
 
+		//Calculator.report += report;
 		Calculator.report = report;
 		return report;
 
@@ -149,7 +148,7 @@ public class Calculator {
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber - secondNumber;
-		report += "Rezultat " + convertToScale(result, scale) + "\n";
+		report += "Rezultat " + convert(result, scale) + "\n";
 		System.out.println(result);
 
 		report += "Zakonchili rabotu\n";
@@ -159,6 +158,7 @@ public class Calculator {
 			saveToFile(report);
 		}
 
+		//Calculator.report += report;
 		Calculator.report = report;
 		return report;
 	}
@@ -184,11 +184,12 @@ public class Calculator {
 			saveToFile(report);
 		}
 
+		//Calculator.report += report;
 		Calculator.report = report;
 		return report;
 	}
 
-	public static String convertToScale(int value, String scale) {
+	/*public static String convertToScale(int value, String scale) {
 		switch (scale) {
 		case "2":
 			return Integer.toBinaryString(value);
@@ -199,9 +200,9 @@ public class Calculator {
 		default:
 			return "" + value;
 		}
-	}
+	}*/
 
-	private static String convert(int value, String scale) {
+	static String convert(int value, String scale) {
 		int defaultScale = 10;
 		try {
 			defaultScale = Integer.parseInt(scale);
@@ -217,8 +218,8 @@ public class Calculator {
 class ReportTools {
 
 	public static String getArguments(int firstNumber, int secondNumber, String scale) {
-		String report = "Argument 1 " + Calculator.convertToScale(firstNumber, scale) + "\n";
-		report += "Argument 2 " + Calculator.convertToScale(secondNumber, scale) + "\n";
+		String report = "Argument 1 " + Calculator.convert(firstNumber, scale) + "\n";
+		report += "Argument 2 " + Calculator.convert(secondNumber, scale) + "\n";
 		return report;
 
 	}

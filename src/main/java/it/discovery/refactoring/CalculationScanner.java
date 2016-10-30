@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Vector;
 
 public class CalculationScanner {
@@ -19,36 +22,37 @@ public class CalculationScanner {
 		String defaultPath = Constants.DEFAULT_SCAN_FOLDER;
 		
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(defaultPath));
-			try {
-				StringBuilder sb = new StringBuilder();
-				String line = reader.readLine();
-				int linesCount=-1;
-				linesCount++;
-				Vector lines = new Vector<>();
+			
+			//BufferedReader reader = new BufferedReader(new FileReader(defaultPath));
 
-				while (line != null) {
-					sb.append(line);
-					sb.append("\n");
+				List<String> lines = Files.readAllLines(Paths.get(defaultPath));
+				//StringBuilder sb = new StringBuilder();
+				//String line = reader.readLine();
+				int linesCount=0;
+				//Vector lines = new Vector<>();
+
+				/*while (line != null) {
+					sb.append(line).append("\n");
 					line = reader.readLine();
 					lines.add(line);
 					linesCount = linesCount + 1;
-				}
-				report = sb.toString();
+				}*/
+				report = lines.toString();
 				scanResult.lineCount = new LineContainer();
-				scanResult.lineCount.lineCount = linesCount;
-				scanResult.lines = lines;
+				scanResult.lineCount.lineCount = lines.size();
+				scanResult.lines = new Vector(lines);
 				scanResult.report = report;
-			} finally {
-				//Pustoy blok. Pochemu? Ya ne znayu
-			}
+			 
 		} catch (FileNotFoundException e) {
 			System.out.println("Error!");
 		}
 		catch (IOException e) {
 			System.out.println("Error!");
 			throw new Exception("!");
-		}
+		} /*finally {
+			
+			reader.close();
+		}*/
 		return scanResult;
 
 	}

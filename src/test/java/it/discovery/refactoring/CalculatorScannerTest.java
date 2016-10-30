@@ -36,11 +36,11 @@ public class CalculatorScannerTest {
 			ScanResult result = (ScanResult) obj;
 			assertEquals(result.lineCount.lineCount, 5);
 			assertEquals(result.report, 
-							"Operaciya slojit\n" +
-							"Argument 1 2\n" + 
-							"Argument 2 3\n" +
-							"Rezultat 5\n" +
-							"Zakonchili rabotu\n");
+							"[Operaciya slojit, " +
+							"Argument 1 2, " + 
+							"Argument 2 3, " +
+							"Rezultat 5, " +
+							"Zakonchili rabotu]");
 			assertEquals(result.lines.size(), 5);
 		} catch (Exception e) {
 			fail(e.getMessage());

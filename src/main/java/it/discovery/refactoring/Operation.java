@@ -23,41 +23,38 @@ public class Operation {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getFirstOp() {
 		return firstOp;
 	}
 
-	public void setFirstOp(String firstOp) {
+	/*public void setFirstOp(String firstOp) {
 		this.firstOp = firstOp;
-	}
+	}*/
 
 	public String getSecondOp() {
 		return secondOp;
 	}
 
-	public void setSecondOp(String secondOp) {
+	/*public void setSecondOp(String secondOp) {
 		this.secondOp = secondOp;
-	}
+	}*/
 
 	public String getScale() {
 		return scale;
 	}
 
-	public void setScale(String scale) {
+	/*public void setScale(String scale) {
 		this.scale = scale;
-	}
+	}*/
 
 	public String getToConsole() {
 		return toConsole;
 	}
 
-	public void setToConsole(String toConsole) {
+	/*public void setToConsole(String toConsole) {
 		this.toConsole = toConsole;
-	}
+	}*/
 	
 	
 }

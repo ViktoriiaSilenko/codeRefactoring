@@ -12,7 +12,7 @@ public class CalculatorTest {
 	//Given_When_Then
 	public void calculate_SumWithDecimalScaleAndFileOutput_Success() {
 		
-		assertEquals(0, Calculator.calculate(new Operation("+", "2", "3", "10", "false")));
+		Calculator.calculate(new Operation("+", "2", "3", "10", "false"));
 	}
 	
 	/*@Test
@@ -34,10 +34,10 @@ public class CalculatorTest {
 	//Given_When_Then
 	public void calculate_SumWithDecimalScaleAndConsuleOutput_Success() {
 		try {
-		String report = Calculator.calculateReport(new Operation("+", "1", "2", "10", "true"));
+		Calculator.calculateReport(new Operation("+", "1", "2", "10", "true"));
 	
 		//assertEquals("", Calculator.report); // red - green - refactor
-		assertEquals(report, "Nachali rabotu\n" +
+		assertEquals(Calculator.report, "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 1\n" + 
 		"Argument 2 2\n" +
@@ -53,7 +53,7 @@ public class CalculatorTest {
 	@Test
 	//Given_When_Then
 	public void calculate_DecreaseWithDecimalScaleAndConsuleOutput_Success() {
-		int result = Calculator.calculate(new Operation("-", "5", "2", "10", "true"));
+		Calculator.calculate(new Operation("-", "5", "2", "10", "true"));
 		//assertEquals("", Calculator.report); // red - green - refactor
 		assertEquals(Calculator.report, "Nachali rabotu\n" +
 		"Operaciya vychitanie\n" +
@@ -62,13 +62,13 @@ public class CalculatorTest {
 		"Rezultat 3\n" +
 		"Zakonchili rabotu\n");
 
-		assertEquals(0, result);
+		//assertEquals(0, result);
 	}
 	
 	@Test
 	//Given_When_Then
 	public void calculate_MultiplyWithDecimalScaleAndConsuleOutput_Success() {
-		int result = Calculator.calculate(new Operation("*", "2", "3", "10", "true"));
+		Calculator.calculate(new Operation("*", "2", "3", "10", "true"));
 		//assertEquals("", Calculator.report); // red - green - refactor
 		assertEquals(Calculator.report, "Nachali rabotu\n" +
 		"Operaciya umnojeniya\n" +
@@ -77,13 +77,13 @@ public class CalculatorTest {
 		"Rezultat 6\n" +
 		"Zakonchili rabotu\n");
 
-		assertEquals(0, result);
+		//assertEquals(0, result);
 	}
 	
 	@Test
 	//Given_When_Then
 	public void calculate_SumWithBinaryScaleAndConsuleOutput_Success() {
-		int result = Calculator.calculate(new Operation("+", "1", "5", "2", "true"));
+		Calculator.calculate(new Operation("+", "1", "5", "2", "true"));
 		assertEquals(Calculator.report, "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 1\n" + 
@@ -91,13 +91,13 @@ public class CalculatorTest {
 		"Rezultat 110\n" +
 		"Zakonchili rabotu\n");
 
-		assertEquals(0, result);
+		//assertEquals(0, result);
 	}
 	
 	@Test
 	//Given_When_Then
 	public void calculate_SumWithOctalScaleAndConsuleOutput_Success() {
-		int result = Calculator.calculate(new Operation("+", "2", "8", "8", "true"));
+		Calculator.calculate(new Operation("+", "2", "8", "8", "true"));
 		assertEquals(Calculator.report, "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 2\n" + 
@@ -105,13 +105,13 @@ public class CalculatorTest {
 		"Rezultat 12\n" +
 		"Zakonchili rabotu\n");
 
-		assertEquals(0, result);
+		//assertEquals(0, result);
 	}
 	
 	@Test
 	//Given_When_Then
 	public void calculate_SumWithHexScaleAndConsuleOutput_Success() {
-		int result = Calculator.calculate(new Operation("+", "5", "12", "16", "true"));
+		Calculator.calculate(new Operation("+", "5", "12", "16", "true"));
 		assertEquals(Calculator.report, "Nachali rabotu\n" +
 		"Operaciya slojit\n" +
 		"Argument 1 5\n" + 
@@ -119,21 +119,21 @@ public class CalculatorTest {
 		"Rezultat 11\n" +
 		"Zakonchili rabotu\n");
 
-		assertEquals(0, result);
+		//assertEquals(0, result);
 	}
 	
-	@Test
+	@Test(expected=RuntimeException.class)
 	//Given_When_Then
 		public void calculate_SumFirstArgumentNonNumber_Error() {
-		int result = Calculator.calculate(new Operation("+", "aaa", "3", "10", "true"));
-		assertEquals(-1, result);
+		Calculator.calculate(new Operation("+", "aaa", "3", "10", "true"));
+		//assertEquals(-1, result);
 	}
 	
-	@Test
+	@Test(expected=RuntimeException.class)
 	//Given_When_Then
 		public void calculate_SumSecondArgumentNonNumber_Error() {
-		int result = Calculator.calculate(new Operation("+", "2", "bb", "10", "true"));
-		assertEquals(-1, result);
+		Calculator.calculate(new Operation("+", "2", "bb", "10", "true"));
+		//assertEquals(-1, result);
 	}
 
 }
