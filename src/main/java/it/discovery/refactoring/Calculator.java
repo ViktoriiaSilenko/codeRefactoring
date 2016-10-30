@@ -83,16 +83,19 @@ public class Calculator {
 	
 	private static String calculateSum(Operation operation) throws IOException {
 		String report = "Operaciya slojit\n";
+
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
+
 		String scale = operation.getScale();
 		boolean isConsole = TextUtils.isConsole(operation.getToConsole());
 		int firstNumber = TextUtils.toInt(firstOp);
 		int secondNumber = TextUtils.toInt(secondOp);
+		int result = firstNumber + secondNumber;
 
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
-		int result = firstNumber + secondNumber;
+		
 		report += "Rezultat " + TextUtils.convert(result, scale) + "\n";
 		System.out.println(result);
 		report += "Zakonchili rabotu\n";
