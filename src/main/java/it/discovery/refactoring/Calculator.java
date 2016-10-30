@@ -1,14 +1,12 @@
 package it.discovery.refactoring;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
 /**
  * Calculate unit that implements arithmetic operations
  */
 public class Calculator {
-	private static final String ERROR_MESSAGE = "Error";
+	static final String ERROR_MESSAGE = "Error";
 	private static String report = null;
 
 	public static void main(String[] args) {
@@ -83,33 +81,25 @@ public class Calculator {
 		return report;
 	}
 	
-	private static boolean isConsole(String toConsole) {
-		boolean isConsole = false;
-		if (toConsole != null && toConsole.equals("true")) {
-			isConsole = true;
-		}
-		return isConsole;
-	}
-
 	private static String calculateSum(Operation operation) throws IOException {
 		String report = "Operaciya slojit\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
 		String scale = operation.getScale();
-		boolean isConsole = isConsole(operation.getToConsole());
-		int firstNumber = toInt(firstOp);
-		int secondNumber = toInt(secondOp);
+		boolean isConsole = TextUtils.isConsole(operation.getToConsole());
+		int firstNumber = TextUtils.toInt(firstOp);
+		int secondNumber = TextUtils.toInt(secondOp);
 
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber + secondNumber;
-		report += "Rezultat " + convert(result, scale) + "\n";
+		report += "Rezultat " + TextUtils.convert(result, scale) + "\n";
 		System.out.println(result);
 		report += "Zakonchili rabotu\n";
 		if (isConsole) {
 			System.out.println(report);
 		} else {
-			saveToFile(report);
+			CalculationReport.saveToFile(report);
 		}
 
 		//Calculator.report += report;
@@ -118,43 +108,26 @@ public class Calculator {
 
 	}
 
-	private static void saveToFile(String content) throws IOException {
-		FileWriter writer = new FileWriter(CalculationScanner.DEFAULT_SCAN_FOLDER);
-		BufferedWriter out = new BufferedWriter(writer);
-		out.write(content);
-		out.close();
-	}
-
-	private static int toInt(String text) {
-		try {
-			return Integer.parseInt(text);
-		} catch (NumberFormatException ex) {
-			System.out.println(ERROR_MESSAGE);
-			// return -1;
-			throw new RuntimeException(ex);
-		}
-	}
-
 	private static String calculateSubtraction(Operation operation) throws IOException {
 		String report = "Operaciya vychitanie\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
-		int firstNumber = toInt(firstOp);
-		int secondNumber = toInt(secondOp);
+		int firstNumber = TextUtils.toInt(firstOp);
+		int secondNumber = TextUtils.toInt(secondOp);
 		String scale = operation.getScale();
-		boolean isConsole = isConsole(operation.getToConsole());
+		boolean isConsole = TextUtils.isConsole(operation.getToConsole());
 
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber - secondNumber;
-		report += "Rezultat " + convert(result, scale) + "\n";
+		report += "Rezultat " + TextUtils.convert(result, scale) + "\n";
 		System.out.println(result);
 
 		report += "Zakonchili rabotu\n";
 		if (isConsole) {
 			System.out.println(report);
 		} else {
-			saveToFile(report);
+			CalculationReport.saveToFile(report);
 		}
 
 		//Calculator.report += report;
@@ -166,21 +139,21 @@ public class Calculator {
 		String report = "Operaciya umnojeniya\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
-		int firstNumber = toInt(firstOp);
-		int secondNumber = toInt(secondOp);
+		int firstNumber = TextUtils.toInt(firstOp);
+		int secondNumber = TextUtils.toInt(secondOp);
 		String scale = operation.getScale();
-		boolean isConsole = isConsole(operation.getToConsole());
+		boolean isConsole = TextUtils.isConsole(operation.getToConsole());
 		
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 		int result = firstNumber * secondNumber;
-		report += "Rezultat " + convert(result, scale) + "\n";
+		report += "Rezultat " + TextUtils.convert(result, scale) + "\n";
 		System.out.println(result);
 
 		report += "Zakonchili rabotu\n";
 		if (isConsole) {
 			System.out.println(report);
 		} else {
-			saveToFile(report);
+			CalculationReport.saveToFile(report);
 		}
 
 		//Calculator.report += report;
@@ -201,17 +174,6 @@ public class Calculator {
 		}
 	}*/
 
-	static String convert(int value, String scale) {
-		int defaultScale = 10;
-		try {
-			defaultScale = Integer.parseInt(scale);
-		} catch (NumberFormatException ex) {
-
-		}
-
-		return Integer.toString(value, defaultScale);
-	}
-
 	private static void setReport(String report) {
 		Calculator.report = report;
 	}
@@ -221,8 +183,8 @@ public class Calculator {
 class ReportTools {
 
 	public static String getArguments(int firstNumber, int secondNumber, String scale) {
-		String report = "Argument 1 " + Calculator.convert(firstNumber, scale) + "\n";
-		report += "Argument 2 " + Calculator.convert(secondNumber, scale) + "\n";
+		String report = "Argument 1 " + TextUtils.convert(firstNumber, scale) + "\n";
+		report += "Argument 2 " + TextUtils.convert(secondNumber, scale) + "\n";
 		return report;
 
 	}

@@ -134,7 +134,7 @@ class ScanResult {
 	}
 
 	public Vector getLines() {
-		return lines;
+		return new Vector(lines); // returned copy
 	}
 
 
