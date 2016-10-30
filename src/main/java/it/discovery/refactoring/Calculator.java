@@ -126,7 +126,7 @@ public class Calculator {
 		try {
 			secondNumber = Integer.parseInt(secondOp);
 		} catch (Exception ex) {
-			System.out.println(getErrorMessage());
+			System.out.println("Oshibka");
 			return -1;
 		}
 
@@ -147,7 +147,7 @@ public class Calculator {
 			}
 
 		} catch (Exception e) {
-			System.out.println(getErrorMessage());
+			System.out.println("Oshibka");
 			return -1;
 		}
 		return 0;
@@ -161,14 +161,14 @@ public class Calculator {
 		try {
 			firstNumber = Integer.parseInt(firstOp);
 		} catch (Exception ex) {
-			System.out.println(getErrorMessage());
+			System.out.println("Oshibka");
 			return -1;
 		}
 		int secondNumber = 0;
 		try {
 			secondNumber = Integer.parseInt(secondOp);
 		} catch (Exception ex) {
-			System.out.println(getErrorMessage());
+			System.out.println("Oshibka");
 			return -1;
 		}
 		report += "Argument 1 " + convert(firstNumber, scale) + "\n";
@@ -188,7 +188,7 @@ public class Calculator {
 			}
 
 		} catch (Exception e) {
-			System.out.println(getErrorMessage());
+			System.out.println("Oshibka");
 			return -1;
 		}
 		return 0;
@@ -223,9 +223,6 @@ public class Calculator {
 		return result;		
 	}
 	
-	private static String getErrorMessage() {
-		return "Oshibka";
-	}
 }
 
 //class OtchetTools {
