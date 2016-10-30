@@ -12,7 +12,7 @@ public class Calculator {
 	public static String report = null;
 
 	public static void main(String[] args) {
-		Operation operation = new Operation(args[0], args[1], args[2]);
+
 		String scale = null;
 		try {
 			scale = args[3];
@@ -27,7 +27,7 @@ public class Calculator {
 			toConsole = "false";
 		}
 
-		calculate(operation, scale, toConsole);
+		calculate(new Operation(args[0], args[1], args[2], scale, toConsole));
 	}
 
 	/**
@@ -44,11 +44,13 @@ public class Calculator {
 	 *            For example, + 2 2 true
 	 */
 
-	public static int calculate(Operation operation, String scale, String toConsole) {
+	public static int calculate(Operation operation) {
 
+		String toConsole = operation.getToConsole();
+		String scale = operation.getScale();
 		String report = "";
 		try {
-			report = calculateReport(operation, scale, toConsole);
+			report = calculateReport(operation);
 		} catch (Exception e) {
 			System.out.println(ERROR_MESSAGE);
 			return -1;
@@ -57,26 +59,26 @@ public class Calculator {
 		return 0;
 	}
 
-	public static String calculateReport(Operation operation, String scale, String toConsole) throws IOException {
-
+	public static String calculateReport(Operation calcOperation) throws IOException {
+		String toConsole = calcOperation.getToConsole();
+		String scale = calcOperation.getScale();
+		
 		String report = "";
 		report += "Nachali rabotu\n";
 
-		boolean isConsole = isConsole(toConsole);
-
-		switch (operation.getName()) {
+		switch (calcOperation.getName()) {
 		case "+": {
-			report += calculateSum(operation, scale, isConsole);
+			report += calculateSum(calcOperation);
 			break;
 		}
 
 		case "-": {
-			report += calculateSubtraction(operation, scale, isConsole);
+			report += calculateSubtraction(calcOperation);
 			break;
 		}
 
 		case "*": {
-			report += calculateMult(operation, scale, isConsole);
+			report += calculateMult(calcOperation);
 			break;
 		}
 
@@ -92,10 +94,12 @@ public class Calculator {
 		return isConsole;
 	}
 
-	private static String calculateSum(Operation operation, String scale, boolean isConsole) throws IOException {
+	private static String calculateSum(Operation operation) throws IOException {
 		String report = "Operaciya slojit\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
+		String scale = operation.getScale();
+		boolean isConsole = isConsole(operation.getToConsole());
 		int firstNumber = toInt(firstOp);
 		int secondNumber = toInt(secondOp);
 
@@ -133,12 +137,14 @@ public class Calculator {
 		}
 	}
 
-	private static String calculateSubtraction(Operation operation, String scale, boolean isConsole) throws IOException {
+	private static String calculateSubtraction(Operation operation) throws IOException {
 		String report = "Operaciya vychitanie\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
 		int firstNumber = toInt(firstOp);
 		int secondNumber = toInt(secondOp);
+		String scale = operation.getScale();
+		boolean isConsole = isConsole(operation.getToConsole());
 
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
@@ -157,12 +163,15 @@ public class Calculator {
 		return report;
 	}
 
-	private static String calculateMult(Operation operation, String scale, boolean isConsole) throws IOException {
+	private static String calculateMult(Operation operation) throws IOException {
 		String report = "Operaciya umnojeniya\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
 		int firstNumber = toInt(firstOp);
 		int secondNumber = toInt(secondOp);
+		String scale = operation.getScale();
+		boolean isConsole = isConsole(operation.getToConsole());
+		
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 		int result = firstNumber * secondNumber;
 		report += "Rezultat " + convert(result, scale) + "\n";
