@@ -40,7 +40,8 @@ public class Calculator {
 
 	public static int calculate(Operation operation, String scale, String toConsole) {
 		report = "";
-		report += "Nachali rabotu\n";	
+		report += "Nachali rabotu\n";
+		int operationResult = 0;
 
 		boolean isConsole = false;
 		if (toConsole != null && toConsole.equals("true")) {
@@ -49,129 +50,148 @@ public class Calculator {
 
 		switch (operation.getName()) {
 		case "+": {
-			report += "Operaciya slojit\n";
-			int firstNumber = 0;
-			try {
-				firstNumber = Integer.parseInt(operation.getFirstOp());
-			} catch (Exception ex) {
-				System.out.println("Oshibka");
-				return -1;
-			}
-			int secondNumber = 0;
-			try {
-				secondNumber = Integer.parseInt(operation.getSecondOp());
-			} catch (Exception ex) {
-				System.out.println("Oshibka");
-				return -1;
-			}
-
-			report += "Argument 1 " + convertToScale(firstNumber, scale) + "\n";
-			report += "Argument 2 " + convertToScale(secondNumber, scale) + "\n";
-			int sum = firstNumber + secondNumber;
-			report += "Rezultat " + convertToScale(sum, scale) + "\n";
-			System.out.println(sum);
-			try {
-				report += "Zakonchili rabotu\n";
-				if (isConsole) {
-					System.out.println(report);
-				} else {
-					FileWriter writer = new FileWriter("c:\\test.txt");
-					BufferedWriter out = new BufferedWriter(writer);
-					out.write(report);
-					out.close();
-				}
-
-			} catch (Exception e) {
-				System.out.println("Oshibka");
-				return -1;
-			}
-		}
-			;
+			operationResult = calculateSum(operation, scale, isConsole);
 			break;
+		}
 
 		case "-": {
-			report += "Operaciya vychitanie\n";
-			int firstNumber = 0;
-			try {
-				firstNumber = Integer.parseInt(operation.getFirstOp());
-			} catch (Exception ex) {
-				System.out.println("Oshibka");
-				return -1;
-			}
-			int secondNumber = 0;
-			try {
-				secondNumber = Integer.parseInt(operation.getSecondOp());
-			} catch (Exception ex) {
-				System.out.println(getErrorMessage());
-				return -1;
-			}
-
-			report += "Argument 1 " + convertToScale(firstNumber, scale) + "\n";
-			report += "Argument 2 " + convertToScale(secondNumber, scale) + "\n";
-			firstNumber -= secondNumber;
-			report += "Rezultat " + convertToScale(firstNumber, scale) + "\n";
-			System.out.println(firstNumber);
-			try {
-				report += "Zakonchili rabotu\n";
-				if (isConsole) {
-					System.out.println(report);
-				} else {
-					FileWriter writer = new FileWriter("c:\\test.txt");
-					BufferedWriter out = new BufferedWriter(writer);
-					out.write(report);
-					out.close();
-				}
-
-			} catch (Exception e) {
-				System.out.println(getErrorMessage());
-				return -1;
-			}
-		}
-			;
+			operationResult = calculateSubtraction(operation, scale, isConsole);
 			break;
+		}
+
 		case "*": {
-			report += "Operaciya umnojeniya\n";
-			int firstNumber = 0;
-			try {
-				firstNumber = Integer.parseInt(operation.getFirstOp());
-			} catch (Exception ex) {
-				System.out.println(getErrorMessage());
-				return -1;
-			}
-			int secondNumber = 0;
-			try {
-				secondNumber = Integer.parseInt(operation.getSecondOp());
-			} catch (Exception ex) {
-				System.out.println(getErrorMessage());
-				return -1;
-			}
-			report += "Argument 1 " + convert(firstNumber, scale) + "\n";
-			report += "Argument 2 " + convert(secondNumber, scale) + "\n";
-			int result = firstNumber * secondNumber;
-			report += "Rezultat " + convert(result, scale) + "\n";
-			System.out.println(result);
-			try {
-				report += "Zakonchili rabotu\n";
-				if (isConsole) {
-					System.out.println(report);
-				} else {
-					FileWriter w = new FileWriter("c:\\test.txt");
-					BufferedWriter out = new BufferedWriter(w);
-					out.write(report);
-					out.close();
-				}
-
-			} catch (Exception e) {
-				System.out.println(getErrorMessage());
-				return -1;
-			}
+			operationResult = calculateMult(operation, scale, isConsole);
+			break;
+		}
 
 		}
-			;
-			break;
+		return operationResult;
+	}
+	
+	private static int calculateSum(Operation operation, String scale, boolean isConsole) {
+		report += "Operaciya slojit\n";
+		String firstOp = operation.getFirstOp();
+		String secondOp = operation.getSecondOp();
+		int firstNumber = 0;
+		try {
+			firstNumber = Integer.parseInt(firstOp);
+		} catch (Exception ex) {
+			System.out.println("Oshibka");
+			return -1;
+		}
+		int secondNumber = 0;
+		try {
+			secondNumber = Integer.parseInt(secondOp);
+		} catch (Exception ex) {
+			System.out.println("Oshibka");
+			return -1;
+		}
+
+		report += "Argument 1 " + convertToScale(firstNumber, scale) + "\n";
+		report += "Argument 2 " + convertToScale(secondNumber, scale) + "\n";
+		int sum = firstNumber + secondNumber;
+		report += "Rezultat " + convertToScale(sum, scale) + "\n";
+		System.out.println(sum);
+		try {
+			report += "Zakonchili rabotu\n";
+			if (isConsole) {
+				System.out.println(report);
+			} else {
+				FileWriter writer = new FileWriter("c:\\test.txt");
+				BufferedWriter out = new BufferedWriter(writer);
+				out.write(report);
+				out.close();
+			}
+
+		} catch (Exception e) {
+			System.out.println("Oshibka");
+			return -1;
 		}
 		return 0;
+		
+	}
+	
+	private static int calculateSubtraction(Operation operation, String scale, boolean isConsole) {
+		report += "Operaciya vychitanie\n";
+		String firstOp = operation.getFirstOp();
+		String secondOp = operation.getSecondOp();
+		int firstNumber = 0;
+		try {
+			firstNumber = Integer.parseInt(firstOp);
+		} catch (Exception ex) {
+			System.out.println("Oshibka");
+			return -1;
+		}
+		int secondNumber = 0;
+		try {
+			secondNumber = Integer.parseInt(secondOp);
+		} catch (Exception ex) {
+			System.out.println(getErrorMessage());
+			return -1;
+		}
 
+		report += "Argument 1 " + convertToScale(firstNumber, scale) + "\n";
+		report += "Argument 2 " + convertToScale(secondNumber, scale) + "\n";
+		firstNumber -= secondNumber;
+		report += "Rezultat " + convertToScale(firstNumber, scale) + "\n";
+		System.out.println(firstNumber);
+		try {
+			report += "Zakonchili rabotu\n";
+			if (isConsole) {
+				System.out.println(report);
+			} else {
+				FileWriter writer = new FileWriter("c:\\test.txt");
+				BufferedWriter out = new BufferedWriter(writer);
+				out.write(report);
+				out.close();
+			}
+
+		} catch (Exception e) {
+			System.out.println(getErrorMessage());
+			return -1;
+		}
+		return 0;
+	}
+	
+	private static int calculateMult(Operation operation, String scale, boolean isConsole) {
+		report += "Operaciya umnojeniya\n";
+		String firstOp = operation.getFirstOp();
+		String secondOp = operation.getSecondOp();
+		int firstNumber = 0;
+		try {
+			firstNumber = Integer.parseInt(firstOp);
+		} catch (Exception ex) {
+			System.out.println(getErrorMessage());
+			return -1;
+		}
+		int secondNumber = 0;
+		try {
+			secondNumber = Integer.parseInt(secondOp);
+		} catch (Exception ex) {
+			System.out.println(getErrorMessage());
+			return -1;
+		}
+		report += "Argument 1 " + convert(firstNumber, scale) + "\n";
+		report += "Argument 2 " + convert(secondNumber, scale) + "\n";
+		int result = firstNumber * secondNumber;
+		report += "Rezultat " + convert(result, scale) + "\n";
+		System.out.println(result);
+		try {
+			report += "Zakonchili rabotu\n";
+			if (isConsole) {
+				System.out.println(report);
+			} else {
+				FileWriter w = new FileWriter("c:\\test.txt");
+				BufferedWriter out = new BufferedWriter(w);
+				out.write(report);
+				out.close();
+			}
+
+		} catch (Exception e) {
+			System.out.println(getErrorMessage());
+			return -1;
+		}
+		return 0;
 	}
 
 	private static String convertToScale(int value, String scale) {
