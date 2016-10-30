@@ -11,7 +11,6 @@ public class Calculator {
 	private static final String ERROR_MESSAGE = "Oshibka";
 	public static String report = null;
 
-
 	public static void main(String[] args) {
 		Operation operation = new Operation(args[0], args[1], args[2]);
 		String scale = null;
@@ -32,43 +31,57 @@ public class Calculator {
 	}
 
 	/**
-	 * Main function.
-	 * Example of usage: create debug or run configuration with the program arguments
-	 * @param operation - object, which stores name of operation, String representation of the first and second operands
-	 * @param scale - scale of notation: 2, 8, 10 or 16 (optional, default is 10)
-	 * @param toConsole - output in the console(false) or in the file(true) (optional)
-	 * For example, + 2 2 true
+	 * Main function. Example of usage: create debug or run configuration with
+	 * the program arguments
+	 * 
+	 * @param operation
+	 *            - object, which stores name of operation, String
+	 *            representation of the first and second operands
+	 * @param scale
+	 *            - scale of notation: 2, 8, 10 or 16 (optional, default is 10)
+	 * @param toConsole
+	 *            - output in the console(false) or in the file(true) (optional)
+	 *            For example, + 2 2 true
 	 */
 
 	public static int calculate(Operation operation, String scale, String toConsole) {
-		report = "";
+
+		String report = "";
+		try {
+			report = calculateReport(operation, scale, toConsole);
+		} catch (Exception e) {
+			System.out.println(ERROR_MESSAGE);
+			return -1;
+		}
+		Calculator.report = report;
+		return 0;
+	}
+
+	public static String calculateReport(Operation operation, String scale, String toConsole) throws IOException {
+
+		String report = "";
 		report += "Nachali rabotu\n";
-		int operationResult = 0;
 
 		boolean isConsole = isConsole(toConsole);
 
-		try {
-			switch (operation.getName()) {
-			case "+": {
-				operationResult = calculateSum(operation, scale, isConsole);
-				break;
-			}
-
-			case "-": {
-				operationResult = calculateSubtraction(operation, scale, isConsole);
-				break;
-			}
-
-			case "*": {
-				operationResult = calculateMult(operation, scale, isConsole);
-				break;
-			}
-
-			}
-		} catch (Exception e) {
-			return -1;
+		switch (operation.getName()) {
+		case "+": {
+			report += calculateSum(operation, scale, isConsole);
+			break;
 		}
-		return operationResult;
+
+		case "-": {
+			report += calculateSubtraction(operation, scale, isConsole);
+			break;
+		}
+
+		case "*": {
+			report += calculateMult(operation, scale, isConsole);
+			break;
+		}
+
+		}
+		return report;
 	}
 
 	private static boolean isConsole(String toConsole) {
@@ -78,33 +91,29 @@ public class Calculator {
 		}
 		return isConsole;
 	}
-	
-	private static int calculateSum(Operation operation, String scale, boolean isConsole) {
-		report += "Operaciya slojit\n";
+
+	private static String calculateSum(Operation operation, String scale, boolean isConsole) throws IOException {
+		String report = "Operaciya slojit\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
 		int firstNumber = toInt(firstOp);
 		int secondNumber = toInt(secondOp);
-		
+
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber + secondNumber;
 		report += "Rezultat " + convertToScale(result, scale) + "\n";
 		System.out.println(result);
-		try {
-			report += "Zakonchili rabotu\n";
-			if (isConsole) {
-				System.out.println(report);
-			} else {
-				saveToFile(report);
-			}
-
-		} catch (Exception e) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
+		report += "Zakonchili rabotu\n";
+		if (isConsole) {
+			System.out.println(report);
+		} else {
+			saveToFile(report);
 		}
-		return 0;
-		
+
+		Calculator.report = report;
+		return report;
+
 	}
 
 	private static void saveToFile(String content) throws IOException {
@@ -119,40 +128,37 @@ public class Calculator {
 			return Integer.parseInt(text);
 		} catch (NumberFormatException ex) {
 			System.out.println(ERROR_MESSAGE);
-			//return -1;
+			// return -1;
 			throw new RuntimeException(ex);
 		}
 	}
-	
-	private static int calculateSubtraction(Operation operation, String scale, boolean isConsole) {
-		report += "Operaciya vychitanie\n";
+
+	private static String calculateSubtraction(Operation operation, String scale, boolean isConsole) throws IOException {
+		String report = "Operaciya vychitanie\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
 		int firstNumber = toInt(firstOp);
 		int secondNumber = toInt(secondOp);
-		
+
 		report += ReportTools.getArguments(firstNumber, secondNumber, scale);
 
 		int result = firstNumber - secondNumber;
 		report += "Rezultat " + convertToScale(result, scale) + "\n";
 		System.out.println(result);
-		try {
-			report += "Zakonchili rabotu\n";
-			if (isConsole) {
-				System.out.println(report);
-			} else {
-				saveToFile(report);
-			}
 
-		} catch (Exception e) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
+		report += "Zakonchili rabotu\n";
+		if (isConsole) {
+			System.out.println(report);
+		} else {
+			saveToFile(report);
 		}
-		return 0;
+
+		Calculator.report = report;
+		return report;
 	}
-	
-	private static int calculateMult(Operation operation, String scale, boolean isConsole) {
-		report += "Operaciya umnojeniya\n";
+
+	private static String calculateMult(Operation operation, String scale, boolean isConsole) throws IOException {
+		String report = "Operaciya umnojeniya\n";
 		String firstOp = operation.getFirstOp();
 		String secondOp = operation.getSecondOp();
 		int firstNumber = toInt(firstOp);
@@ -161,19 +167,16 @@ public class Calculator {
 		int result = firstNumber * secondNumber;
 		report += "Rezultat " + convert(result, scale) + "\n";
 		System.out.println(result);
-		try {
-			report += "Zakonchili rabotu\n";
-			if (isConsole) {
-				System.out.println(report);
-			} else {
-				saveToFile(report);
-			}
 
-		} catch (Exception e) {
-			System.out.println(ERROR_MESSAGE);
-			return -1;
+		report += "Zakonchili rabotu\n";
+		if (isConsole) {
+			System.out.println(report);
+		} else {
+			saveToFile(report);
 		}
-		return 0;
+
+		Calculator.report = report;
+		return report;
 	}
 
 	public static String convertToScale(int value, String scale) {
@@ -194,33 +197,33 @@ public class Calculator {
 		try {
 			defaultScale = Integer.parseInt(scale);
 		} catch (NumberFormatException ex) {
-			
+
 		}
-		
-		return Integer.toString(value, defaultScale);	
+
+		return Integer.toString(value, defaultScale);
 	}
-	
+
 }
 
 class ReportTools {
-	
+
 	public static String getArguments(int firstNumber, int secondNumber, String scale) {
 		String report = "Argument 1 " + Calculator.convertToScale(firstNumber, scale) + "\n";
 		report += "Argument 2 " + Calculator.convertToScale(secondNumber, scale) + "\n";
 		return report;
-		
+
 	}
-	
+
 }
 
-//class OtchetTools {
-//	public static void zapusk() {
-//		String otchet = MainClass.otchet;
-//		System.out.println(otchet);
-//	}
-//	
-//	public static void main(String[] argumenty) {
-//		OtchetTools otchet = new OtchetTools();
-//		otchet.zapusk();
-//	}
-//}
+// class OtchetTools {
+// public static void zapusk() {
+// String otchet = MainClass.otchet;
+// System.out.println(otchet);
+// }
+//
+// public static void main(String[] argumenty) {
+// OtchetTools otchet = new OtchetTools();
+// otchet.zapusk();
+// }
+// }

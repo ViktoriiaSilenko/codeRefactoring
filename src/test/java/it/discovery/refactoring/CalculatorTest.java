@@ -1,6 +1,9 @@
 package it.discovery.refactoring;
 
 import static org.junit.Assert.*;
+
+import java.io.IOException;
+
 import org.junit.Test;
 
 public class CalculatorTest {
@@ -12,7 +15,7 @@ public class CalculatorTest {
 		assertEquals(0, Calculator.calculate(new Operation("+", "2", "3"), "10", "false"));
 	}
 	
-	@Test
+	/*@Test
 	//Given_When_Then
 	public void calculate_SumWithDecimalScaleAndConsuleOutput_Success() {
 		int result = Calculator.calculate(new Operation("+", "1", "2"), "10", "true");
@@ -25,6 +28,26 @@ public class CalculatorTest {
 		"Zakonchili rabotu\n");
 
 		assertEquals(0, result);
+	}*/
+	
+	@Test
+	//Given_When_Then
+	public void calculate_SumWithDecimalScaleAndConsuleOutput_Success() {
+		try {
+		String report = Calculator.calculateReport(new Operation("+", "1", "2"), "10", "true");
+	
+		//assertEquals("", Calculator.report); // red - green - refactor
+		assertEquals(report, "Nachali rabotu\n" +
+		"Operaciya slojit\n" +
+		"Argument 1 1\n" + 
+		"Argument 2 2\n" +
+		"Rezultat 3\n" +
+		"Zakonchili rabotu\n");
+		} catch(IOException e) {
+			fail(e.getMessage());
+		}
+
+		//assertEquals(0, result);
 	}
 	
 	@Test
