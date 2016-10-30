@@ -11,9 +11,7 @@ public class Calculator {
 
 
 	public static void main(String[] args) {
-		String operation = args[0];
-		String firstOp = args[1];
-		String secondOp = args[2];
+		Operation operation = new Operation(args[0], args[1], args[2]);
 		String scale = null;
 		try {
 			scale = args[3];
@@ -28,19 +26,15 @@ public class Calculator {
 			toConsole = "false";
 		}
 
-		calculate(new Operation(operation, firstOp, secondOp), scale, toConsole);
+		calculate(operation, scale, toConsole);
 	}
 
 	/**
 	 * Main function.
 	 * Example of usage: create debug or run configuration with the program arguments
-	 * 
-	 * @param operation - sign of operation
-	 * @param firstOp - String representation of the first operand
-	 * @param secondOp - String representation of the second operand
+	 * @param operation - object, which stores name of operation, String representation of the first and second operands
 	 * @param scale - scale of notation: 2, 8, 10 or 16 (optional, default is 10)
 	 * @param toConsole - output in the console(false) or in the file(true) (optional)
-	 * 
 	 * For example, + 2 2 true
 	 */
 
